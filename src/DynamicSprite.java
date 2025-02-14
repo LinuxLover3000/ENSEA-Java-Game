@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.Image;
 
 public class DynamicSprite extends SolidSprite{
@@ -15,10 +16,10 @@ public class DynamicSprite extends SolidSprite{
         this.direction = direction;
     }
 
-    public void draw(){
+    public void draw(Graphics g){
         int index = ((int)System.currentTimeMillis() / (2*timeBetweenFrame)) % spriteSheetNumberOfColumn;
         int attitude = direction.getFrameLineNumber();
 
-        drawImage
+        //g.drawImage(this.getImage(), (int) this.getX(), (int) this.getY(), (int) this.getX() + this.getWidth(), (int) this.getY() + this.getHeight(), index * this.getWidth(), attitude * this.getHeight(), (index + 1) * this.getWidth(), (index + 1) * this.getHeight(), null);
     }
 }

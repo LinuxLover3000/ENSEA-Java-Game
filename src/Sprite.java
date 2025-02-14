@@ -14,7 +14,24 @@ public class Sprite implements Displayable {
         this.height = height;
     }
 
+    @Override
     public void draw(Graphics g){
         g.drawImage(image, (int)x, (int)y, (int)width, (int)height, null);
+    }
+
+    public double getX() {
+        return x;
+    }
+    public double getY() {
+        return y;
+    }
+    public double getWidth() {
+        return width;
+    }
+    public double getHeight() {
+        return height;
+    }
+    public Image getImage() {
+        return image;
     }
 }

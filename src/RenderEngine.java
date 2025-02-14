@@ -17,6 +17,7 @@ public class RenderEngine extends JPanel implements Engine {
         renderList.add(displayable);
     }
 
+    @Override
     public void paint(Graphics g){
         super.paint(g);
         for (Displayable d : renderList){
@@ -24,6 +25,7 @@ public class RenderEngine extends JPanel implements Engine {
         }
     }
 
+    @Override
     public void update(){
         repaint();
         //System.out.println("RenderEngine update()");
