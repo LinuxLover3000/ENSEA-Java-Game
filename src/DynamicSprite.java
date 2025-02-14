@@ -6,7 +6,7 @@ public class DynamicSprite extends SolidSprite{
     private double speed = 5;
     private final int spriteSheetNumberOfColumn = 10;
     private int timeBetweenFrame = 200;
-    private Direction direction;
+    private Direction direction = Direction.SOUTH;
 
     public DynamicSprite(Image image, double x, double y, double width, double height){
         super(image, x, y, width, height);
@@ -16,10 +16,13 @@ public class DynamicSprite extends SolidSprite{
         this.direction = direction;
     }
 
+    @Override
     public void draw(Graphics g){
-        int index = ((int)System.currentTimeMillis() / (2*timeBetweenFrame)) % spriteSheetNumberOfColumn;
+        int index = ((int)System.currentTimeMillis() / timeBetweenFrame) % spriteSheetNumberOfColumn;
         int attitude = direction.getFrameLineNumber();
 
-        //g.drawImage(this.getImage(), (int) this.getX(), (int) this.getY(), (int) this.getX() + this.getWidth(), (int) this.getY() + this.getHeight(), index * this.getWidth(), attitude * this.getHeight(), (index + 1) * this.getWidth(), (index + 1) * this.getHeight(), null);
+        g.drawImage(this.getImage(), this.getX(), this.getY(),
+                    this.getX() + this.getWidth(), this.getY() + this.getHeight(),
+                    index * this.getWidth(), attitude * this.getHeight(), (index + 1) * this.getWidth(), (attitude + 1) * this.getHeight(), null);
     }
 }

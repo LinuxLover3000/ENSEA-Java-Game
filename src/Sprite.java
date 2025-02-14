@@ -19,17 +19,18 @@ public class Sprite implements Displayable {
         g.drawImage(image, (int)x, (int)y, (int)width, (int)height, null);
     }
 
-    public double getX() {
-        return x;
+    //The following getters are mainly for the DynamicSprite g.drawImage() call, which requires int arguments
+    public int getX() {
+        return (int)x;
     }
-    public double getY() {
-        return y;
+    public int getY() {
+        return (int)y;
     }
-    public double getWidth() {
-        return width;
+    public int getWidth() {
+        return (int)width;
     }
-    public double getHeight() {
-        return height;
+    public int getHeight() {
+        return (int)height;
     }
     public Image getImage() {
         return image;
