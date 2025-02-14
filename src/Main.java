@@ -17,7 +17,7 @@ public class Main {
         
         renderEngine = new RenderEngine();
         Timer renderTimer = new Timer(50, (time)-> renderEngine.update());
-        
+
         displayZoneFrame.getContentPane().add(renderEngine);
 
         /*
@@ -27,12 +27,18 @@ public class Main {
         renderEngine.addToRenderList(treeSpr1);
         renderEngine.addToRenderList(treeSpr2);
         */
+        //hero.setDirection(Direction.WEST);
+
 
         DynamicSprite hero = new DynamicSprite(ImageIO.read(new File("./resource/img/heroTileSheetLowRes.png")), 200, 300, 48, 50);
-        hero.setDirection(Direction.WEST);
+        GameEngine gameEngine = new GameEngine(hero);
+        Timer gameTimer = new Timer(50, (time)-> gameEngine.update());
         renderEngine.addToRenderList(hero);
 
+
         renderTimer.start();
+        gameTimer.start();
+        displayZoneFrame.addKeyListener(gameEngine);
         displayZoneFrame.setVisible(true);
     }
 
