@@ -3,7 +3,7 @@ import java.awt.Image;
 
 public class Sprite implements Displayable {
     private Image image;
-    private double x, y;
+    double x, y;
     private double width, height;
     
     public Sprite(Image image, double x, double y, double width, double height){

@@ -1,5 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 
 public class DynamicSprite extends SolidSprite{
     private boolean isWalking = true;
@@ -14,6 +16,58 @@ public class DynamicSprite extends SolidSprite{
 
     public void setDirection(Direction direction){
         this.direction = direction;
+    }
+
+    private void move() {
+        switch(direction) {
+            case NORTH:
+                y -= speed;
+                break;
+            case WEST:
+                x -= speed;
+                break;
+            case SOUTH:
+                y += speed;
+                break;
+            case EAST:
+                x += speed;
+        }
+    }
+
+    private boolean isMovingPossible(ArrayList<Sprite> environment){
+        Rectangle2D.Double hitBox = new Rectangle2D.Double(getX(), getY(), getWidth(), getHeight());
+        Rectangle2D.Double possibleHitBox;
+        switch(direction) {
+            case NORTH:
+                possibleHitBox = new Rectangle2D.Double(getX(), getY() - speed, getWidth(), getHeight());
+                break;
+            case WEST:
+                possibleHitBox = new Rectangle2D.Double(getX() - speed, getY(), getWidth(), getHeight());
+                break;
+            case SOUTH:
+                possibleHitBox = new Rectangle2D.Double(getX(), getY() + speed, getWidth(), getHeight());
+                break;
+            case EAST:
+                possibleHitBox = new Rectangle2D.Double(getX() + speed, getY(), getWidth(), getHeight());
+                break;
+            default:
+                possibleHitBox = hitBox;
+        }
+        for (Sprite s : environment) {
+            if (s instanceof SolidSprite && s != this) {
+                Rectangle2D.Double spriteHitBox = new Rectangle2D.Double(s.getX(), s.getY(), s.getWidth(), s.getHeight());
+                if (spriteHitBox.intersects(possibleHitBox)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void moveIfPossible(ArrayList<Sprite> environment){
+        if(isMovingPossible(environment)){
+            move();
+        }
     }
 
     @Override
