@@ -17,15 +17,16 @@ public class Main {
         displayZoneFrame.setSize(400,600);
         displayZoneFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
+        Playground level = new Playground("./resource/level/level1.txt");
         DynamicSprite hero = new DynamicSprite(ImageIO.read(new File("./resource/img/heroTileSheetLowRes.png")), 200, 300, 48, 50);
 
         renderEngine = new RenderEngine();
         gameEngine = new GameEngine(hero);
         physicEngine = new PhysicEngine();
 
-        Timer renderTimer = new Timer(50, (time)-> renderEngine.update());
-        Timer gameTimer = new Timer(50, (time)-> gameEngine.update());
-        Timer physicTimer = new Timer(50, (time)-> physicEngine.update());
+        Timer renderTimer = new Timer(20, (time)-> renderEngine.update());
+        Timer gameTimer = new Timer(20, (time)-> gameEngine.update());
+        Timer physicTimer = new Timer(20, (time)-> physicEngine.update());
 
         displayZoneFrame.getContentPane().add(renderEngine);
 
@@ -45,13 +46,19 @@ public class Main {
         displayZoneFrame.addKeyListener(gameEngine);
         displayZoneFrame.setVisible(true);
 
-        SolidSprite testSprite = new SolidSprite(ImageIO.read(new File("./resource/img/rock.png")), 250, 300, 64, 64);
-        renderEngine.addToRenderList(hero);
+        /*SolidSprite testSprite = new SolidSprite(ImageIO.read(new File("./resource/img/rock.png")), 250, 300, 64, 64);
         renderEngine.addToRenderList(testSprite);
-        physicEngine.addToMovingSpriteList(hero);
         ArrayList<Sprite> a = new ArrayList<Sprite>();
         a.add(testSprite);
         physicEngine.setEnvironment(a);
+        */
+
+        renderEngine.setRenderList(level.getSpriteList());
+        physicEngine.setEnvironment(level.getSolidSpriteList());
+
+        renderEngine.addToRenderList(hero);
+        physicEngine.addToMovingSpriteList(hero);
+        
 
     }
 

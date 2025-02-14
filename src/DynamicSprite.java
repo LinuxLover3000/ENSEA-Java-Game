@@ -7,7 +7,7 @@ public class DynamicSprite extends SolidSprite{
     private boolean isWalking = true;
     private double speed = 5;
     private final int spriteSheetNumberOfColumn = 10;
-    private int timeBetweenFrame = 200;
+    private int timeBetweenFrame = 50;
     private Direction direction = Direction.SOUTH;
 
     public DynamicSprite(Image image, double x, double y, double width, double height){
